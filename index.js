@@ -9,8 +9,72 @@ const Web3 = require('web3');
 const Trust = require('./build/contracts/Trust.json');
 
 const init = async () => {
+  /*
+  window.addEventListener('load', async () => {
+    // Wait for loading completion to avoid race conditions with web3 injection timing.
+     if (window.ethereum) {
+       const web3 = new Web3(window.ethereum);
+       try {
+         // Request account access if needed
+         await window.ethereum.enable();
+         // Acccounts now exposed
+         return web3;
+       } catch (error) {
+         console.error(error);
+       }
+     }
+     // Legacy dapp browsers...
+     else if (window.web3) {
+       // Use Mist/MetaMask's provider.
+       const web3 = window.web3;
+       console.log('Injected web3 detected.');
+       return web3;
+     }
+     // Fallback to localhost; use dev console port by default...
+     else {
+       const provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
+       const web3 = new Web3(provider);
+       console.log('No web3 instance injected, using Local web3.');
+       return web3;
+     }
+   });
+//--------
+  ---- Alternative 1 (MEDIUM): -------
+  if(window.ethereum){
+    window.web3 = new Web3(window.ethereum)
+    await window.ethereum.request({ method: 'eth_requestAccounts' })
+  }
+  else if(window.web3){
+    window.web3 = new Web3(window.ethereum)
+  }
+  else{
+    window.alert("Non-Ethereum browser detected. You should consider trying MetaMask!")
+  }
+//--------
+  ----- Alternative 2: -------
   // create the web3 instance (which connects us to the blockchain)
-  const web3 = new Web3('HTTP://127.0.0.1:9545'); // 'http://localhost:8545' is the URL of the local Ganache blockchain
+  if (window.ethereum) {
+    await window.ethereum.send('eth_requestAccounts');
+    window.web3 = new Web3(window.ethereum);
+    return true;
+  }
+  return false;
+
+  ----- Alternative 3: (TRUFFLE): ------
+  // Is there is an injected web3 instance by Metamask?
+  let web3;
+  if (typeof web3 !== 'undefined') {
+    init.web3Provider = web3.currentProvider;
+    web3 = new Web3(web3.currentProvider);
+  } else {
+    // If no injected web3 instance is detected, fallback to Ganache.
+    init.web3Provider = new web3.providers.HttpProvider('http://127.0.0.1:8545'); // truffle suggests new web3.providers.HttpProvider('http://127.0.0.1:7545');
+    web3 = new Web3(init.web3Provider);
+  }*/
+  //--------
+
+  //const web3 = new Web3('HTTP://127.0.0.1:9545'); // 'HTTP://127.0.0.1:9545' is the URL of the local Ganache GUI blockchain
+  const web3 = new Web3('http://127.0.0.1:8545'); // 'http://127.0.0.1:8545' is the URL of localhost 8545
 
   const id = await web3.eth.net.getId();
 	const deployedNetwork = Trust.networks[id];
