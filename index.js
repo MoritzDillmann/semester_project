@@ -1,6 +1,44 @@
 // import QR-Code plugin
 // from: https://github.com/jibrelnetwork/ethereum-qr-code/blob/master/README.md
-// import EthereumQRPlugin from 'ethereum-qr-code'
+const EthereumQRPlugin = require('ethereum-qr-code');
+// vs. ES6: import EthereumQRPlugin from 'ethereum-qr-code'
+
+// --------- create a webserver ----------------
+// load the http-module
+const http = require("http");
+// import the fs-module to be able to read files
+const fs = require('fs').promises;
+
+// define host and port to which our server is connected to
+const host = 'localhost';
+const port = 8000;
+
+// formulate server answer to requests
+// read the HTML file
+let indexFile;
+const requestListener = function (req, res) {
+  res.setHeader("Content-Type", "text/html");
+  res.writeHead(200);
+  res.end(indexFile);
+};
+
+// create server and use Request Listener
+const server = http.createServer(requestListener);
+
+fs.readFile(__dirname + "/index.html")
+    .then(contents => {
+        indexFile = contents;
+        // connect the server to a network address
+        server.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
+        });
+    })
+    .catch(err => {
+        console.error(`Could not read index.html file: ${err}`);
+        process.exit(1);
+    });
+// ----------------------------------------------
+
 
 // let's use web3 with the 'Web3' object
 const Web3 = require('web3');
@@ -9,6 +47,7 @@ const Web3 = require('web3');
 const Trust = require('./build/contracts/Trust.json');
 
 const init = async () => {
+  
   /*
   window.addEventListener('load', async () => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
@@ -122,6 +161,7 @@ const init = async () => {
   const result2 = await contract.methods.customers(addresses[1]).call();
   console.log("Status of the customer(s):", result2);
 
+  
   // second 'transaction' function: withdraw
   const receipt2 = await contract.methods.withdraw().send({
     from: addresses[1]});
@@ -132,48 +172,47 @@ const init = async () => {
   // whether she already received it (true/false)
   const result3 = await contract.methods.customers(addresses[1]).call();
   console.log("New status of the customer(s):", result3);
+  
+  // QR code
+  const qr = new EthereumQRPlugin();
 
+  qr.toDataUrl({
+    "to": addresses[1], //required: address of the smart contract
+    "from": "0xA0769D8100B85D3142Bc46F21C52Dc8BC18e9077", //optional, defaults to current active user account
+    "value": 1000000000000000000, //Amount of ETH to send. Measured in wei. Defaults to 0.
+    "gas": 21000, // optional - Recommended amount of gas. Defaults to 21000.
+  
+    "mode": "contract_function", // required - Mode of invocation. Expected value: contract_function
+    "functionSignature": {
+      "name": "withdraw", // Name of the invoked function
+      "payable": false, //required - Defines whether function is able to receive ETH or not. (value should be zero if false)
+      "args": [
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint"
+        }
+      ]
+    },
+    "argsDefaults": [
+      {
+        "name": "to",
+        "value": addresses[1]
+      },
+      {
+        "name": "value",
+        "value": 1000000000000000000
+      }
+    ]
+  }).then((qrCodeDataUri) => {
+    console.log('Your QR id generated:', qrCodeDataUri.dataURL) //> 'data:image/png;base64,iVBORw0KGgoA....'
+  });
+  
 }
 
 init();
 
 // --------------------------------------------------------------
-
-// QR code
-/* const qr = new EthereumQRPlugin();
-
-const qrCode = qr.toCanvas({
-  "to": "0xcontractaddress",
-  "from": "0xsenderaddress",
-  "value": 0,
-  "gas": 100000,
-  "mode": "contract_function",
-  "functionSignature": {
-    "name": "transfer",
-    "payable": false,
-    "args": [
-      {
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "name": "value",
-        "type": "uint"
-      }
-    ]
-  },
-  "argsDefaults": [
-    {
-      "name": "to",
-      "value": "0xtokensrecipient"
-    },
-    {
-      "name": "value",
-      "value": 1000000000000000000
-    }
-  ]
-}, {
-  
-  selector: '#my-qr-code',
-})
-*/
