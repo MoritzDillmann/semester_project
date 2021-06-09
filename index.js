@@ -175,42 +175,22 @@ const init = async () => {
   
   // QR code
   const qr = new EthereumQRPlugin();
-
+   
   qr.toDataUrl({
-    "to": addresses[1], //required: address of the smart contract
-    "from": "0xA0769D8100B85D3142Bc46F21C52Dc8BC18e9077", //optional, defaults to current active user account
-    "value": 1000000000000000000, //Amount of ETH to send. Measured in wei. Defaults to 0.
-    "gas": 21000, // optional - Recommended amount of gas. Defaults to 21000.
-  
-    "mode": "contract_function", // required - Mode of invocation. Expected value: contract_function
+    to: addresses[1], //required: address of the smart contract
+    from: "0xA0769D8100B85D3142Bc46F21C52Dc8BC18e9077", //optional, defaults to current active user account
+    value: 1000000000000000000, //Amount of ETH to send. Measured in wei. Defaults to 0.
+    gas: 21000, // optional - Recommended amount of gas. Defaults to 21000.
+    /*
+    mode: "contract_function", // required - Mode of invocation. Expected value: contract_function
     "functionSignature": {
       "name": "withdraw", // Name of the invoked function
-      "payable": false, //required - Defines whether function is able to receive ETH or not. (value should be zero if false)
-      "args": [
-        {
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "name": "value",
-          "type": "uint"
-        }
-      ]
+      payable: true, //required - Defines whether function is able to receive ETH or not. (value should be zero if false)
     },
-    "argsDefaults": [
-      {
-        "name": "to",
-        "value": addresses[1]
-      },
-      {
-        "name": "value",
-        "value": 1000000000000000000
-      }
-    ]
+    */
   }).then((qrCodeDataUri) => {
     console.log('Your QR id generated:', qrCodeDataUri.dataURL) //> 'data:image/png;base64,iVBORw0KGgoA....'
   });
-  
 }
 
 init();
