@@ -21,7 +21,15 @@ To interact with deployed contracts i use truffle console.
 
 Source: https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask
 
-## Next steps: 
+
+## Start Angular App Development: 
+Navigate to ./app
+>  npm install -g @ionic/cli
+>  npm install
+>  ionic serve 
+
+
+## Future steps: 
 
 Connect to a public testnet like Ropsten or Kovan using a public API service for Ethereum from 'Infura' (instead of running an Ethereum node yourself)
 

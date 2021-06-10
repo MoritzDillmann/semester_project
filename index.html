@@ -43,14 +43,19 @@
             font-size: 64px;
         }
     </style>
-</head>
 
+</head>
+<script type = "text/javascript" src="index.js"></script>
 <body>
+    <div id="image-placeholder"></div>
     <div class="center">
-        <h1>Hello Again!</h1>
+        <h1>Hello again!</h1>
         <p>This is served from a file</p>
         <br>
+        <p>Click the following button to see the function in action</p>    
+        <input type = "button" onclick = "displayBase64Image(imagePlaceholder, myQR)" value = "Display">
     </div>
+
 </body>
 
 </html>
