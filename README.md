@@ -36,12 +36,13 @@ https://www.trufflesuite.com/truffle
 (You can check all commands you can use with Truffle with: `truffle`)
 
 ### Smart contract development
-1. Create Smart Contracts in _contracts/_ folder: <br>
+1. Create Smart Contracts in _.contracts/_ folder: <br>
+`cd contracts` <br>
 `truffle create contract Trust.sol` <br>
 —> creates a new Solidity file in the contracts/ directory
 
 2. Edit Smart Contract in your favourite Code Editor (e.g. Visual Studio Code). <br>
- I created the smart contract for this Dapp, "Trust.sol", in Remix: http://remix.ethereum.org/. Remix allows you to test your contracts functionality before you deploy it in your project.
+ <p> I created the smart contract for this Dapp, "Trust.sol", in Remix: http://remix.ethereum.org/. Remix allows you to test your contracts functionality before you deploy it in your project. </p>
 
 ### Migrate your smart contract
 1. navigate to the migrations folder: <br>
