@@ -1,7 +1,7 @@
 # Dapp to send ETH across Metamask walldts using QR codes
 This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.
 
-Author: Moritz Dillmann \\
+Author: Moritz Dillmann <br>
 Institution: University of Lausanne
 
 ## Motivation: 
@@ -24,31 +24,31 @@ Source: https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-m
 ## Getting started:
 
 ### Create a Truffle project
-1. Install node.js (v14.17.0) and npm (v6.14.13) \\
+1. Install node.js (v14.17.0) and npm (v6.14.13) <br>
 https://nodejs.org/en/
 
 2. Install Truffle: 
-`npm install truffle -g` \\
+`npm install truffle -g` <br>
 https://www.trufflesuite.com/truffle
 
 3. Create a new Truffle project:
-`truffle init` \\
+`truffle init` <br>
 (You can check all commands you can use with Truffle with: `truffle`)
 
 ### Smart contract development
-1. Create Smart Contracts in _contracts/_ folder: \\
-`truffle create contract Trust.sol` \\
+1. Create Smart Contracts in _contracts/_ folder: <br>
+`truffle create contract Trust.sol` <br>
 —> creates a new Solidity file in the contracts/ directory
 
-2. Edit Smart Contract in your favourite Code Editor (e.g. Visual Studio Code)
+2. Edit Smart Contract in your favourite Code Editor (e.g. Visual Studio Code). <br>
  I created the smart contract for this Dapp, "Trust.sol", in Remix: http://remix.ethereum.org/. Remix allows you to test your contracts functionality before you deploy it in your project.
 
 ### Migrate your smart contract
-1. navigate to the migrations folder
-`ls migrations/`
+1. navigate to the migrations folder: <br>
+`ls migrations/` <br>
 Don’t modify this first migration file, because Truffle needs it to use its migration feature.
 
-2. create a migration file
+2. create a migration file: <br>
 `truffle create migration Trust`
 
  Truffle adds a random number to the name of your new migration file in order to know in what order it has to run the migration.
