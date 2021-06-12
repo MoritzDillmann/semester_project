@@ -1,7 +1,7 @@
 # Dapp to send ETH across Metamask walldts using QR codes
 This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.
 
-Author: Moritz Dillmann
+Author: Moritz Dillmann \\
 Institution: University of Lausanne
 
 ## Motivation: 
@@ -24,20 +24,20 @@ Source: https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-m
 ## Getting started:
 
 ### Create a Truffle project
-1. Install node.js (v14.17.0) and npm (v6.14.13)
+1. Install node.js (v14.17.0) and npm (v6.14.13) \\
 https://nodejs.org/en/
 
 2. Install Truffle: 
-`npm install truffle -g`
+`npm install truffle -g` \\
 https://www.trufflesuite.com/truffle
 
 3. Create a new Truffle project:
-`truffle init`
+`truffle init` \\
 (You can check all commands you can use with Truffle with: `truffle`)
 
 ### Smart contract development
-1. Create Smart Contracts in _contracts/_ folder:
-`truffle create contract Trust.sol`
+1. Create Smart Contracts in _contracts/_ folder: \\
+`truffle create contract Trust.sol` \\
 —> creates a new Solidity file in the contracts/ directory
 
 2. Edit Smart Contract in your favourite Code Editor (e.g. Visual Studio Code)
