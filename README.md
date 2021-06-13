@@ -20,7 +20,11 @@
     - [Interact with your smart contract](#interact-with-your-smart-contract)
     - [Test your smart contract](#test-your-smart-contract)
     - [Next, let's generate a base64 (string) that we then can transform into a QR code](#next-lets-generate-a-base64-string-that-we-then-can-transform-into-a-qr-code)
-    - [Run your script and test QR code](#run-your-script-and-test-qr-code)
+- [Usage](#usage)
+  - [1. Start your local Ethereum blockchain](#1-start-your-local-ethereum-blockchain)
+  - [2. Deploy your smart contract to the local blockchain](#2-deploy-your-smart-contract-to-the-local-blockchain)
+  - [3. Start your server](#3-start-your-server)
+  - [4. Interact with your Dapp in the browser](#4-interact-with-your-dapp-in-the-browser)
 ## About
 <p> This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.<br>
 It consists of <br>
@@ -449,11 +453,23 @@ app.listen(port, () => {
 console.log(`Example app listening at http://localhost:${port}`)
 })
 ```
+# Usage
+<p> When you have everything installed as described above, do the following steps to use the Dapp.<br>
+You can skip step 1. and step 2. when your local blockchain is still running and your smart contract is already deployed to it.<br>
+</p>
 
-### Run your script and test QR code
-1. With the script being ready, start your server: <br>
+## 1. Start your local Ethereum blockchain
+`ganache-cli -m "<Metamask seed phrase>"`
+
+## 2. Deploy your smart contract to the local blockchain
+`truffle migrate --reset --network development`
+
+## 3. Start your server
+`cd server` <br>
 `node server.js`
 
-2. Open the **index.html** file in your browser and click on the "Click me!" button. 
-
-3. Scan the fresh QR code with your smartphone camera (and the Metamask app opens automatically) or with the built-in QR code scanner of the Metamask app.
+## 4. Interact with your Dapp in the browser
+1. Open **index.html** in your browser. <br>
+2. Click the "Click me!" button <br>
+3. Scan the fresh QR code with your smartphone camera (and the Metamask app opens automatically) <br> 
+   or with the built-in QR code scanner of the Metamask app.
