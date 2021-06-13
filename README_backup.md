@@ -300,10 +300,6 @@ Let's use the localhost network for it: </p> <br>
 <p> We can now see in Metamask that the first account already has a little bit less ETH because it pays for the deployment of the contract (and all other transactions) </p>
 
 
-### Connect Metamask to Ganache
-
-
-
 ## Frontend
 1. set up a server
 2. set up a client using an HTML file
