@@ -1,5 +1,8 @@
 # Dapp to send ETH across Metamask accounts using QR codes 🧞
 
+  - [About](#about)
+  - [Language requirements](#language-requirements)
+  - [Development Environments](#development-environments)
 - [Dapp to send ETH across Metamask accounts using QR codes 🧞](#dapp-to-send-eth-across-metamask-accounts-using-qr-codes-)
   - [About](#about)
   - [Language requirements](#language-requirements)
