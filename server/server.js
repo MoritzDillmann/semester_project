@@ -9,7 +9,7 @@ const EthereumQRPlugin = require("ethereum-qr-code"); // QR code plugin
 const express = require('express') // server
 var cors = require('cors')
 
-// server
+// start server
 const app = express()
 app.use(cors())
 const port = 3000

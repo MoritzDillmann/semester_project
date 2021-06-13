@@ -2,15 +2,16 @@
 
 - [Dapp to send ETH across Metamask accounts using QR codes 🧞](#dapp-to-send-eth-across-metamask-accounts-using-qr-codes-)
   - [About](#about)
-  - [Language requirements:](#language-requirements)
-  - [Development Environments:](#development-environments)
-- [Getting started:](#getting-started)
+  - [Language requirements](#language-requirements)
+  - [Development Environments](#development-environments)
+- [Getting started](#getting-started)
   - [1. Backend](#1-backend)
     - [Install Node.js](#install-nodejs)
     - [Create a Truffle project](#create-a-truffle-project)
     - [Create your smart contract](#create-your-smart-contract)
     - [Migrate your smart contract](#migrate-your-smart-contract)
     - [Set up a server](#set-up-a-server)
+  - [2. Frontend](#2-frontend)
 ## About
 <p> This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.<br>
 It consists of <br>
@@ -24,7 +25,7 @@ Institution: University of Lausanne
 Motivation: <br>
 This project aims to provide a *proof of concept* for using smart contracts in a _consumer CO2 compensation loyalty programme_ initiated by the Munich-based start-up <a href="https://imero.de/">IMERO GmbH</a>.</p>
 
-##  Language requirements:
+##  Language requirements
 1. Backend:
    1. Javascript
    2. Solidity (Ethereum smart contract)
@@ -33,7 +34,7 @@ This project aims to provide a *proof of concept* for using smart contracts in a
    1. Javascript (web3 API)
    2. HTML
 
-## Development Environments:
+## Development Environments
 1. Smart contract development and testing:
 <a href="https://www.trufflesuite.com/">Truffle</a> (v5.3.2) Ethereum development framework <br>
 
@@ -41,7 +42,7 @@ This project aims to provide a *proof of concept* for using smart contracts in a
    
 3. Smart contract/ Dapp interaction in the browser: <a href="https://metamask.io/">Metamask wallet</a><br>
 
-# Getting started:
+# Getting started
 
 ## 1. Backend
 <p> We'll begin with the backend, which includes the development of our smart contract and the setup of a server.
@@ -120,4 +121,30 @@ Don’t modify the already existing migration file, Truffle needs it to use its 
 4. Create a new file named "server.js": <br>
 `touch server.js`
 
+5. In _server.js_, import Express and Cors: <br>
+```
+// imports
+const express = require('express')
+var cors = require('cors')
+```
+
+1. Start a server and make it ready to connect at Port 3000 <br>
+   
+```
+const app = express()
+app.use(cors())
+const port = 3000
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+```
+
+2. Create a server interface (where we will later integrate the web3 API) <br>
+```
+app.get('/generateqrcode', async (req, res) => {
+    })
+```
+
+## 2. Frontend
 
