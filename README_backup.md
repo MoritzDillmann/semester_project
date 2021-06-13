@@ -1,35 +1,3 @@
-# Dapp to send ETH across Metamask accounts using QR codes 🧞
-<p> This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes. <br> 
-It consists of <br>
-
-1. a *backend* with a single smart contract and a minimalistic server and,<br>
-2. a *frontend* with a basic web page (displaying our QR code) and a Web3 API.
-
-Author: Moritz Dillmann <br>
-Institution: University of Lausanne </p>
-
-## Motivation: 
-<p> This project aims to provide a *proof of concept* for using smart contracts in a _consumer CO2 compensation loyalty programme_ initiated by the Munich-based start-up <a href="https://imero.de/">IMERO GmbH</a>. </p> 
-
-##  Language requirements:
-1. Backend:
-   1. Javascript
-   2. Solidity (Ethereum smart contract)
-   
-2. Frontend:
-   1. Javascript (web3 API)
-   2. HTML
-
-## Environments:
-1. Smart contract development and testing:
-<a href="https://www.trufflesuite.com/">Truffle</a> (v5.3.2) Ethereum development framework <br>
-
-2. Setting up a local blockchain: <a href="https://www.trufflesuite.com/ganache">Ganache</a>-cli and Ganache GUI <br>
-   
-3. Smart contract/ Dapp interaction in the browser: <a href="https://metamask.io/">Metamask wallet</a><br>
-
-<p> "MetaMask is the easiest way to interact with dapps in a browser. It is an extension for Chrome or Firefox that connects to an Ethereum network without running a full node on the browser's machine. It can connect to the main Ethereum network, any of the testnets (Ropsten, Kovan, and Rinkeby), or a local blockchain such as the one created by Ganache or Truffle Develop."
-Source: https://www.trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask </p>
 
 # Getting started:
 

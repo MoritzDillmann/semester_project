@@ -1,12 +1,12 @@
-# Dapp to send ETH across Metamask accounts using QR codes 🧞
+# Dapp to send ETH across Metamask accounts <br> using QR codes 🧞
 
   - [About](#about)
   - [Language requirements](#language-requirements)
   - [Development Environments](#development-environments)
-- [Dapp to send ETH across Metamask accounts using QR codes 🧞](#dapp-to-send-eth-across-metamask-accounts-using-qr-codes-)
+- [Dapp to send ETH across Metamask accounts <br> using QR codes 🧞](#dapp-to-send-eth-across-metamask-accounts--using-qr-codes-)
   - [About](#about)
   - [Language requirements](#language-requirements)
-  - [Development Environments](#development-environments)
+  - [Development environments](#development-environments)
 - [Getting started](#getting-started)
   - [1. Backend](#1-backend)
     - [Install Node.js](#install-nodejs)
@@ -15,6 +15,7 @@
     - [Migrate your smart contract](#migrate-your-smart-contract)
     - [Set up a server](#set-up-a-server)
   - [2. Frontend](#2-frontend)
+    - [Web3.js API](#web3js-api)
 ## About
 <p> This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.<br>
 It consists of <br>
@@ -37,7 +38,7 @@ This project aims to provide a *proof of concept* for using smart contracts in a
    1. Javascript (web3 API)
    2. HTML
 
-## Development Environments
+## Development environments
 1. Smart contract development and testing:
 <a href="https://www.trufflesuite.com/">Truffle</a> (v5.3.2) Ethereum development framework <br>
 
@@ -133,21 +134,34 @@ var cors = require('cors')
 
 1. Start a server and make it ready to connect at Port 3000 <br>
    
-```
-const app = express()
-app.use(cors())
-const port = 3000
+    ```
+    const app = express()
+    app.use(cors())
+    const port = 3000
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
-```
+    app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+    })
+    ```
 
 2. Create a server interface (where we will later integrate the web3 API) <br>
-```
-app.get('/generateqrcode', async (req, res) => {
-    })
-```
+    ```
+    app.get('/generateqrcode', async (req, res) => {
+        })
+    ```
 
 ## 2. Frontend
 
+### Web3.js API
+<p> In a next step, we connect web3.js to our Truffle project to interact with our smart contract.
+web3.js is a commonly used Ethereum Javascript API.
+For details about the web3 library collection, look at the 
+<a href="https://web3js.readthedocs.io/en/v1.3.4/#:~:text=Ethereum%20JavaScript%20API-,web3.,using%20HTTP%2C%20IPC%20or%20WebSocket.&text=js%20as%20well%20as%20providing%20an%20API%20reference%20documentation%20with%20examples">docs</a>.
+
+1. Install web3.js (v1.3.6) <br>
+    `npm install web3` <br>
+    You can check your web3 version with: `npm view web3 version`
+
+2. Import Web3 into your Truffle project. In _./server/server.js_,   import web3: <br>
+    `const Web3 = require(‘web3’);` <br>
+    —> now, you can use web3 with the ‘Web3’ _object_.  
