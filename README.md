@@ -20,6 +20,7 @@
     - [Interact with your smart contract](#interact-with-your-smart-contract)
     - [Test your smart contract](#test-your-smart-contract)
     - [Next, let's generate a base64 (string) that we then can transform into a QR code](#next-lets-generate-a-base64-string-that-we-then-can-transform-into-a-qr-code)
+    - [Run your script and test QR code](#run-your-script-and-test-qr-code)
 ## About
 <p> This Dapp constitutes a simple programme to send and receive ether (ETH) across Metamask wallets using QR codes.<br>
 It consists of <br>
@@ -448,3 +449,11 @@ app.listen(port, () => {
 console.log(`Example app listening at http://localhost:${port}`)
 })
 ```
+
+### Run your script and test QR code
+1. With the script being ready, start your server: <br>
+`node server.js`
+
+2. Open the **index.html** file in your browser and click on the "Click me!" button. 
+
+3. Scan the fresh QR code with your smartphone camera (and the Metamask app opens automatically) or with the built-in QR code scanner of the Metamask app.
