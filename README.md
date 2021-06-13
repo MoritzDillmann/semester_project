@@ -117,6 +117,7 @@ With each transaction, Ganache shows you the Gas that was used to pay for the mi
 web3.js is a commonly used Ethereum Javascript API.
 For details about the web3 library collection, look at the 
 <a href="https://web3js.readthedocs.io/en/v1.3.4/#:~:text=Ethereum%20JavaScript%20API-,web3.,using%20HTTP%2C%20IPC%20or%20WebSocket.&text=js%20as%20well%20as%20providing%20an%20API%20reference%20documentation%20with%20examples">docs</a>.
+
 ### Install web3.js
 
 ### Install web3.js (v1.3.6)
@@ -138,7 +139,7 @@ You can check your web3 version with: `npm view web3 version`
 
 This design allows for flexibility: it allows the user to decide which Ethereum wallet to use. e.g. Metamask. </p>
 
-1. go to the newly created _index.js_ file: <br>
+1. go to the newly created _server.js_ file: <br>
 
 <p> Here, we create the web3 _instance_ (this is different to the previously created Web3 object): </p>
 
@@ -157,21 +158,20 @@ Later, we will create a second instance to connect to Metamask.
 We “teach” Web3 to interact with your smart contract by giving it 2 pieces of information: <br>
     1. Contract address <br>
     2. Contract abi (a JSON document that describes all the functions that can be called from outside the blockchain).</p>
-    <br>
 ```
 const contract = new web3.eth.Contract(
-    Trust.abi, /*required argument. (A JSON document that describes all the functions that can be called from outside the blockchain).*/
-    deployedNetwork.address //optional argument (uniquely identifies a specific smart contract on the blockchain)
+    Trust.abi, 
+    deployedNetwork.address 
 );
-``` 
+```
 
-::Where to find the ‘abi’ and ‘address’ information?::<br>
-		1. Open a new terminal tab 
-		2. Go to the _.contracts/_ folder in the build directory of the project
-		3. There you see all the abis that were created when we compiled our smart contract
-		4. Open the Trust.json file
-		5.  This shows us all the (public) functions that are accessible from outside the smart contract
-		6. The contract address appears in the “networks” section of the Trust.json file (after we deployed our smart contract)
+2. Where to find the ‘abi’ and ‘address’ information?<br>
+    1. Open a new terminal tab 
+    2. Go to the _.contracts/_ folder in the build directory of the project
+    3. There you see all the abis that were created when we compiled our smart contract
+    4. Open the Trust.json file
+    5. This shows us all the (public) functions that are accessible from outside the smart contract
+    6. The contract address appears in the “networks” section of the Trust.json file (after we deployed our smart contract)
 
 
 2. Add to the second line of the server.js file: <br>
@@ -207,6 +207,117 @@ const contract = new web3.eth.Contract(
 
 ### Interact with your smart contract
 <p> We can now interact with our smart contract by calling its functions. Here, we have to distinguish between Ethereum's call and transaction API.
+
+1. Call a 'call' function of the smart contract using Ethereum's call API <br>
+
+```
+const result = await contract.methods.admin().call(); 
+console.log("our admin is:", result);
+```
+2. get the ten unlocked accounts of ganache <br>
+
+`const addresses = await web3.eth.getAccounts();`
+
+3. Call a 'transaction' function of the smart contract using Ethereum's transaction API
+
+```
+const receipt = await contract.methods.addCustomer(addresses[1], 0).send({
+        from: addresses[0],
+	        value: web3.utils.toWei('1') //translates ETH to wei
+            // alternative 1: value: '1000000000000000000' //wei
+		    // alternative 2: use BN library:
+		    // value: web3.utils.toBN('1000000000000000000')
+    });
+    console.log("receipt of admin's transaction to the smart contract", receipt); 
+    /*get receipt of the transaction (that your transaction was 
+    received by the blockchain and is being processed).*/
+```
+
+4. Call a second 'call' function telling us the amount a customer is supposed to receive (msg.value) and whether she already received it (true/false)
+```
+const result2 = await contract.methods.customers(addresses[1]).call();
+    console.log("Status of the customer(s):", result2);
+```
+
+5. Call the second transaction function of our smart contract, "withdraw":
+```
+const receipt2 = await contract.methods.withdraw().send({
+    from: addresses[1]});
+console.log("Customer withdraws amount from contract:", receipt2);
+```
+
+6. Call a third 'call' function telling us the amount a customer is supposed to receive (msg.value) and whether she eventually received it (true/false)
+
+```
+const result3 = await contract.methods.customers(addresses[1]).call();
+console.log("New status of the customer(s):", result3);
+```
+
+Next, let's connect the Metamask wallet to our Dapp.
+
+
+### Integrate Web3 with Metamask
+<p> With Metamask, you can connect to both, public networks (e.g. Mainnet, Ropsten, Kovan & Rinekeby testnet) or to your Local development (Ganache). <br> </p>
+Metamask is a wallet that <br>
+1. receives the unsigned transaction request by Web3 <br>
+2. Asks the wallet user to confirm the transaction <br>
+3. Sends the signed transaction to the Ethereum network <br>
+
+1. Install Metamask <a href="https://metamask.io/download">browser extension</a> and create an account<br>
+Extensions exist for Chrome, Firefox, Brave, and Edge.
+
+2. Detect Metamask's web3 injection <br>
+Add the following to the server.js file: 
+
+```
+// Is there is an injected web3 instance by Metamask?
+    let web3;
+    if (typeof web3 !== 'undefined') {
+        init.web3Provider = web3.currentProvider;
+        web3 = new Web3(web3.currentProvider);
+    } else {
+        // If no injected web3 instance is detected, fallback to Ganache.
+        init.web3Provider = new web3.providers.HttpProvider('http://127.0.0.1:8545'); // truffle suggests new web3.providers.HttpProvider('http://127.0.0.1:9545');
+        web3 = new Web3(init.web3Provider);
+    }
+```
+
+3. add a web3 instance for Metamask
+<p> As mentioned earlier, we now add a second web3-instance to allow our Metamask wallet to communicate with our local blockchain. <br>
+Let's use the localhost network for it: </p> <br>
+
+`const web3 = new Web3('http://127.0.0.1:8545');` <br>
+
+'http://127.0.0.1:8545' is the URL of localhost 8545
+
+4. Check out the seed phrase of your Metamask wallet
+   1. In your Metamask wallet, go to Settings
+   2. Go to Security & Privacy
+   3. Click on “Reveal Seed Phrase”
+   4. Copy the Seed Phrase to the Clipboard
+
+5. Add the seed phrase to the following command in a new terminal tab: <br>
+
+`ganache-cli -m "<seed phrase>"` <br>
+
+—> this way, the addresses in Metamask will already have some ETH to do transactions
+
+6. Go back to Metamask and change your network to Localhost 8545 <br>
+
+<p> —> you see that the first address generated by Metamask already has 100 ETH in its account</p>
+
+7. Open the _truffle-config.js_ file and comment out the following: <br>
+<img src="./assets/img/development_network.png"/>
+
+### Deploy your smart contract
+<p>Open a new terminal and run the following command:</p>
+
+`truffle migrate --reset --network development` <br>
+
+<p> We can now see in Metamask that the first account already has a little bit less ETH because it pays for the deployment of the contract (and all other transactions) </p>
+
+
+### Connect Metamask to Ganache
 
 
 
