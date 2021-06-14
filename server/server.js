@@ -114,6 +114,7 @@ app.get('/generateqrcode', async (req, res) => {
     });
 })
 
+// listen at port 3000 of localhost
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

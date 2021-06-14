@@ -32,18 +32,18 @@ It consists of <br>
 1. a **backend** with a single smart contract and a minimalistic server and,<br>
 2. a **frontend** with a Web3 API and a basic web page from where we call the smart contract and display the corresponding QR code. <br>
 
-Author: Moritz Dillmann <br>
-Institution: University of Lausanne 
+**Author:** Moritz Dillmann <br>
+**Institution:** University of Lausanne 
 
-Motivation: <br>
+**Motivation:** <br>
 This project aims to provide a *proof of concept* for using smart contracts in a _consumer CO2 compensation loyalty programme_ initiated by the Munich-based start-up <a href="https://imero.de/">IMERO GmbH</a>.</p>
 
 ##  Language requirements
-1. Backend:
+1. **Backend:**
    1. Javascript
    2. Solidity (Ethereum smart contract)
    
-2. Frontend:
+2. **Frontend:**
    1. Javascript (web3 API)
    2. HTML
 
@@ -51,7 +51,7 @@ This project aims to provide a *proof of concept* for using smart contracts in a
 1. Smart contract development and testing:
 <a href="https://www.trufflesuite.com/">Truffle</a> (v5.3.2) Ethereum development framework <br>
 
-2. Setting up a local blockchain: <a href="https://www.trufflesuite.com/ganache">Ganache-cli</a> <br>
+2. Setting up a local blockchain: <a href="https://www.trufflesuite.com/ganache">Ganache-CLI</a> (v6.12.2), (Ganache-Core: v2.13.2)<br>
    
 3. Smart contract/ Dapp interaction in the browser: <a href="https://metamask.io/">Metamask wallet</a><br>
 
@@ -128,7 +128,7 @@ I recommend to install Node.js using its version manager <a href="https://github
 2. In the new directory, install Express (v4.17.1) <br>
     `npm install express --save`<br>
 
-3. Install Cors <br>
+3. Install Cors  (v2.8.5) <br>
     `npm install cors`
 
 4. Create a new file named "server.js": <br>
